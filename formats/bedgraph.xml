@@ -1,0 +1,13 @@
+<dataformat>
+  <name>bedgraph</name>
+  <description>bedgraph format</description>
+  <alias>bedgraph</alias>
+  <prefix>bedgraph</prefix>
+  <extensions>
+  	<extension default="true">.bedgraph</extension>
+  </extensions>
+
+  <toolshedgalaxy>
+  	<extension>bedgraph</extension> 	
+  </toolshedgalaxy>
+</dataformat>
