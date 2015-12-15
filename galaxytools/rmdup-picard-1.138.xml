@@ -1,6 +1,6 @@
 <tool id="rmdup" name="rmdup">
-  <description>for each sequence in a file</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/picard:1.134">java -jar /usr/local/bin/picard.jar MarkDuplicates REMOVE_DUPLICATES=true METRICS_FILE=$output_metrics INPUT=$input OUTPUT=$output_bam"</command>
+  <description>mark and removes duplicates from a bam file</description>
+  <command interpreter="docker" dockerimage="genomicpariscentre/picard:1.134">java -jar /usr/local/bin/picard.jar MarkDuplicates REMOVE_DUPLICATES=true METRICS_FILE=$output_metrics INPUT=$input OUTPUT=$output_bam</command>
   <inputs>
     <param format="bam" name="input" type="data" label="Source file"/>
   </inputs>
