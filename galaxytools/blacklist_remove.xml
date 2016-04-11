@@ -1,0 +1,20 @@
+<tool id="blacklistremove" name="blacklistremove">
+	<description>Galaxytool for the use of bedtools</description>
+	<command interpreter="docker" dockerimage="img_bedtools:latest">
+	/bin/bash -c "bedtools subtract -a $input1_bed -b /blacklist_files/${blacklist.source}blacklist.bed > $output_bed"
+	</command>
+	<inputs>
+		<conditional name="blacklist">
+			<param name="source" type="select" label="Blacklist Source">
+				<option value="mm9" selected="true">mm9 Blacklist</option>
+				<option value="mm10">mm10 Blacklist</option>
+				<option value="hg19">hg19 Blacklist</option>
+			</param>
+		</conditional>
+
+		<param format="bed" name="input1_bed" type="data" label="Source file"/>
+	</inputs>
+	<outputs>
+		<data format="bed" name="output_bed"/>
+	</outputs>
+</tool>
