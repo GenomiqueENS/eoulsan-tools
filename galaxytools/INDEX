@@ -1,3 +1,5 @@
 rmdup-picard-1.138.xml
 bam-to-bigwig.xml
 bam-to-bedgraph.xml
+blacklist_remove.xml
+trimAdapt.xml
