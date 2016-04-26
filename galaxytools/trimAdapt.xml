@@ -1,6 +1,6 @@
 <tool id="trimadapt" name="trimadapt">
     	<description>QC : Trim galore, if necessary (see QC reads)</description>
-    	<command interpreter="docker" dockerimage="genomicpariscentre/trim_galore:latest">
+    	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:latest">
 	/bin/bash -c "trim_galore --path_to_cutadapt /tmp/cutadapt-1.8.1/bin/cutadapt --quality ${quality} -e ${error} --stringency ${stringency} --length ${length} 
 	#if $is.paired == "no"
 		$input1 ;
