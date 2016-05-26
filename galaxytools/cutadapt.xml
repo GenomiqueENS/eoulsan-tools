@@ -1,0 +1,64 @@
+<tool id="cutadapt" name="cutadapt">
+  <description>convert input_fastq to output_fastq</description>
+  <command interpreter="docker" dockerimage="genomicpariscentre/cutadapt:1.8.3">
+        cutadapt
+	#if $is2.endmode=="5" 
+            -g file:$input_adapter
+            #if $is.paired=="yes"
+                -G file:$input_adapter 
+            #end if
+     	#elif $is2.endmode=="3"
+	    -a file:$input_adapter
+            #if $is.paired=="yes"
+                -A file:$input_adapter
+            #end if           
+	#else:
+            -b file:$input_adapter
+            #if $is.paired=="yes"
+                -B file:$input_adapter
+            #end if
+        #end if
+
+	#if $is3.trimmode=="discard-trimmed"
+            --discard-trimmed
+        #elif $is3.trimmode=="discard-untrimmed"
+            --discard-untrimmed
+        #end if
+
+        -o $output_fastq 
+        $input_fastq1
+        #if $is.paired=="yes"
+            -p $input_fastq2
+        #end if
+  </command>
+  <inputs>
+    <param format="adapter" name="input_adapter" type="data" label="Source file"/>
+    <param format="fastq" name="input_fastq1" type="data" label="Source file"/>
+    <conditional name="is">
+                        <param name="paired" type="select" label="Paired end selection">
+                                <option value="no" selected="true">Single end</option>
+                                <option value="yes">Paired end</option>
+                        </param>
+                        <when value="yes">
+				<param format="fastq" name="input_fastq2" type="data" label="Source file"/>
+			</when>
+    </conditional>
+    <conditional name="is2">
+			<param name="endmode" type="select" label="cutadapt mode">
+                                <option value="5">5' adapter</option>
+                                <option value="3">3' adapter</option>
+				<option value="both" selected="true">5'/3'</option>
+                        </param>
+    </conditional>
+    <conditional name="is3">
+			<param name="trimmode" type="select" label="trim mode">
+                                <option value="default" selected="true">default</option>
+                                <option value="discard-trimmed">discard trimmed</option>
+				<option value="discard-untrimmed">discard untrimmed</option>
+                        </param>
+    </conditional>
+  </inputs>
+  <outputs>
+    <data format="fastq" name="output_fastq" />
+  </outputs>
+</tool>
