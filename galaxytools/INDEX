@@ -3,3 +3,4 @@ bam-to-bigwig.xml
 bam-to-bedgraph.xml
 blacklist_remove.xml
 trimAdapt.xml
+cutadapt.xml
