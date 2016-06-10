@@ -25,11 +25,15 @@
             --discard-untrimmed
         #end if
 
-        -o $output_fastq 
-        $input_fastq1
+        -o $output_fastq1
         #if $is.paired=="yes"
-            -p $input_fastq2
+            -p $output_fastq2
         #end if
+ 
+        $input_fastq1
+        #if $is.paired=="yes"	
+            $input_fastq2
+        #end if          
   </command>
   <inputs>
     <param format="adapter" name="input_adapter" type="data" label="Source file"/>
@@ -59,6 +63,15 @@
     </conditional>
   </inputs>
   <outputs>
-    <data format="fastq" name="output_fastq" />
+    <data format="fastq" name="output_fastq1" />
+    <conditional name="is4">
+                        <param name="paired" type="select" label="Paired end selection">
+                                <option value="no" selected="true">Single end</option>
+                                <option value="yes">Paired end</option>
+                        </param>
+                        <when value="yes">
+				<data format="fastq" name="output_fastq2" />
+			</when>
+    </conditional>
   </outputs>
 </tool>
