@@ -1,0 +1,41 @@
+<tool id="sortbed" name="sortbed">
+	<description> Sort bed files </description>
+	<command interpreter="docker" dockerimage="genomicpariscentre/bedtools:latest">
+	/bin/bash -c "bedtools sort
+	
+	#if $param.sort == "default"
+		-i $input1 > $output1";
+	#else if $param.sort == "sizeA"
+		-sizeA -i $input1 > $output1";
+	#else if $param.sort == "sizeD"
+		-sizeD -i $input1 > $output1";
+	#else if $param.sort == "chrThenSizeA"
+		-chrThenSizeA -i $input1 > $output1";
+	#else if $param.sort == "chrThenSizeD"
+		-chrThenSizeD -i $input1 > $output1";
+	#else if $param.sort == "chrThenScoreA"
+		-chrThenScoreA -i $input1 > $output1";
+	#else if $param.sort == "chrThenScoreD"
+		-chrThenScoreD -i $input1 > $output1";
+	#end if
+	</command>
+	<inputs>
+		<param format="peaks" name="input1" type="data" label="Source file"/>
+
+		<conditional name="param">
+			<param name="sort" type="select" label="sort parameter">
+				<option value="default" selected="true">default parameter</option>
+				<option value="sizeA">sizeA parameter</option>
+				<option value="sizeD">sizeD parameter</option>
+				<option value="chrThenSizeA">chrThenSizeA parameter</option>
+				<option value="chrThenSizeD">chrThenSizeD parameter</option>
+				<option value="chrThenScoreA">chrThenScoreA parameter</option>
+				<option value="chrThenScoreD">chrThenScoreD parameter</option>
+			</param>
+		</conditional>
+	</inputs>
+
+	<outputs>
+		<data format="peaks" name="output1"/>
+	</outputs>
+</tool>
