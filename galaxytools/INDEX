@@ -5,3 +5,4 @@ blacklist_remove.xml
 trimAdapt.xml
 cutadapt.xml
 sortbed.xml
+sortsam-picard-1.138.xml

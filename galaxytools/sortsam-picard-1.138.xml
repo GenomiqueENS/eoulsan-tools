@@ -1,0 +1,31 @@
+<tool id="sortsam" name="sortsam">
+	<description>sort a sam file</description>
+	<command interpreter="docker" dockerimage="genomicpariscentre/picard:1.134">java -Xmx20g -jar /usr/local/bin/picard.jar SortSam TMP_DIR=$TMPDIR INPUT=$input OUTPUT=$output_sorted
+
+	#if $param.sort == "coordinate"
+		SORT_ORDER=coordinate
+	#else if $param.sort == "unsorted"
+		SORT_ORDER=unsorted
+	#else if $param.sort == "queryname"
+		SORT_ORDER=queryname
+	#else if $param.sort == "duplicate"
+		SORT_ORDER=duplicate
+	#end if
+	</command>
+	<inputs>
+		<param format="sam" name="input" type="data" label="Source file"/>
+
+		<conditional name="param">
+			<param name="sort" type="selected" label="sort parameter">
+				<option value="coordinate" selected="true">coordinate parameter</option>
+				<option value="unsorted">unsorted parameter</option>
+				<option value="queryname">queryname parameter</option>
+				<option value="duplicate">duplicate parameter</option>
+			</param>
+		</conditional>
+	</inputs>
+	<outputs>
+		<data format="sam" name="output_sorted"/>
+	</outputs>
+
+</tool>
