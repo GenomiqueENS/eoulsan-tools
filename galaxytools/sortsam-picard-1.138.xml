@@ -16,7 +16,7 @@
 		<param format="sam" name="input" type="data" label="Source file"/>
 
 		<conditional name="param">
-			<param name="sort" type="selected" label="sort parameter">
+			<param name="sort" type="select" label="sort parameter">
 				<option value="coordinate" selected="true">coordinate parameter</option>
 				<option value="unsorted">unsorted parameter</option>
 				<option value="queryname">queryname parameter</option>
