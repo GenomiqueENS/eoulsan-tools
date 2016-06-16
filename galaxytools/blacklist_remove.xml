@@ -1,6 +1,6 @@
 <tool id="blacklistremove" name="blacklistremove">
 	<description>Galaxytool for the use of bedtools</description>
-	<command interpreter="docker" dockerimage="img_bedtools:latest">
+	<command interpreter="docker" dockerimage="genomicpariscentre/bedtools:latest">
 	/bin/bash -c "bedtools subtract -a $input1_bed -b /blacklist_files/${blacklist.source}blacklist.bed > $output_bed"
 	</command>
 	<inputs>
