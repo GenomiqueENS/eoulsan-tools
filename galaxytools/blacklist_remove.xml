@@ -12,9 +12,9 @@
 			</param>
 		</conditional>
 
-		<param format="bed" name="input1_bed" type="data" label="Source file"/>
+		<param format="peaks" name="input1_bed" type="data" label="Source file"/>
 	</inputs>
 	<outputs>
-		<data format="bed" name="output_bed"/>
+		<data format="peaks" name="output_bed"/>
 	</outputs>
 </tool>
