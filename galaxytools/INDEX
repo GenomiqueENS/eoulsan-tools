@@ -6,3 +6,4 @@ trimAdapt.xml
 cutadapt.xml
 sortbed.xml
 sortsam-picard-1.138.xml
+rmdup-picard-v2-1.138.xml
