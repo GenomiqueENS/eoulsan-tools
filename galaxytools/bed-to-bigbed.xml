@@ -1,0 +1,27 @@
+<tool id="bed2bigbed" name="bed2bigbed">
+	<description>Convert bed files to bigbed files</description>
+	<command interpreter="docker" dockerimage="genomicpariscentre/bigbed:latest">
+	/bin/bash -c "/awkCommand.sh $input1 output_norm.bed ;
+	sort -k1,1 -k2,2n output_norm.bed > output_norm_sort.bed ;
+	/tmp/bedToBigBed -as=/tmp/narrowPeak.as -type=bed6+4 output_norm_sort.bed
+	#if $chrom.name == "mm10"
+		/tmp/mm10.chrom.sizes $output1"
+	#else if $chrom.name == "hg19"
+		/tmp/hg19.chrom.sizes $output1"
+	#end if
+	</command>
+	<inputs>
+		<param format="peaks" name="input1" type="data" label="Source file"/>
+
+		<conditional name="chrom">
+			<param name="name" type="select" label="Chromosome selection">
+				<option value="mm10" selected="true">mm10 chromosome</option>
+				<option value="hg19">hg19 chromosome</option>
+			</param>
+		</conditional>
+	</inputs>
+
+	<outputs>
+		<data format="bigbed" name="output1"/>
+	</outputs>
+</tool>
