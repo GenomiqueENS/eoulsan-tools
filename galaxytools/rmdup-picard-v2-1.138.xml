@@ -2,7 +2,7 @@
   <description>mark and removes duplicates from a bam file</description>
   <command interpreter="docker" dockerimage="genomicpariscentre/picard:1.134">java -Xmx20g -jar /usr/local/bin/picard.jar MarkDuplicates TMP_DIR=$TMPDIR REMOVE_DUPLICATES=true ASSUME_SORTED=$is_sort METRICS_FILE=$output_metrics INPUT=$input OUTPUT=$output_sam</command>
   <inputs>
-    <param name="is_sort" type="text" value="false" label="Is sorted"/>
+    <param name="is_sort" type="text" value="true" label="Is sorted"/>
     <param format="sam" name="input" type="data" label="Source file"/>
   </inputs>
   <outputs>
