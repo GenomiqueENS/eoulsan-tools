@@ -1,6 +1,6 @@
 <tool id="bed2bigbed" name="bed2bigbed">
 	<description>Convert bed files to bigbed files</description>
-	<command interpreter="docker" dockerimage="genomicpariscentre/bigbed:latest">
+	<command interpreter="docker" dockerimage="genomicpariscentre/bed2bigbed:latest">
 	/bin/bash -c "/awkCommand.sh $input1 output_norm.bed ;
 	sort -k1,1 -k2,2n output_norm.bed > output_norm_sort.bed ;
 	/tmp/bedToBigBed -as=/tmp/narrowPeak.as -type=bed6+4 output_norm_sort.bed
