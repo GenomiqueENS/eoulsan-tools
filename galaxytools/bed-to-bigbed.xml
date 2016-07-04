@@ -8,6 +8,8 @@
 		/tmp/mm10.chrom.sizes $output1"
 	#else if $chrom.name == "hg19"
 		/tmp/hg19.chrom.sizes $output1"
+	#else if $chrom.name == "hg38"
+		/tmp/hg38.chrom.sizes $output1"
 	#end if
 	</command>
 	<inputs>
@@ -17,6 +19,7 @@
 			<param name="name" type="select" label="Chromosome selection">
 				<option value="mm10" selected="true">mm10 chromosome</option>
 				<option value="hg19">hg19 chromosome</option>
+				<option value="hg38">hg38 chromosome</option>
 			</param>
 		</conditional>
 	</inputs>
