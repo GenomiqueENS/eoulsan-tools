@@ -1,6 +1,6 @@
 <tool id="bam2bigwig" name="bam2bigwig">
   <description>Convert bam files to bigwig files</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/deeptools:1.5.12">bamCoverage --numberOfProcessors=1 -b $input_bam -bai $input_bai -o $output_bigwig $binSize $bsize 
+  <command interpreter="docker" dockerimage="genomicpariscentre/deeptools:1.5.12">bamCoverage --numberOfProcessors=1 -b $input_bam -bai $input_bai -o $output_bigwig --binSize $bsize 
   #if $is.norm == "yes"
     --normalizeUsingRPKM -of bigwig
   #else
