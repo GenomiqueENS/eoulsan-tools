@@ -5,12 +5,14 @@
 	sort -k1,1 -k2,2n output_norm.bed > output_norm_sort.bed ;
 	/tmp/bedToBigBed -as=/tmp/narrowPeak.as -type=bed6+4 output_norm_sort.bed
 	#if $chrom.name == "mm10"
-		/tmp/mm10.chrom.sizes $output1"
+		/tmp/mm10.chrom.sizes $output1 ;
 	#else if $chrom.name == "hg19"
-		/tmp/hg19.chrom.sizes $output1"
+		/tmp/hg19.chrom.sizes $output1 ;
 	#else if $chrom.name == "hg38"
-		/tmp/hg38.chrom.sizes $output1"
+		/tmp/hg38.chrom.sizes $output1 ;
 	#end if
+	rm output_norm.bed;
+	rm output_norm_sort.bed"
 	</command>
 	<inputs>
 		<param format="peaks" name="input1" type="data" label="Source file"/>
