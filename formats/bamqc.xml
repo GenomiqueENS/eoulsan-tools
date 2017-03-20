@@ -1,0 +1,12 @@
+<dataformat>
+  <name>bamqc_report_html</name>
+  <description>BamQC report in html format</description>
+  <prefix>bamqc</prefix>
+  <extensions>
+  	<extension default="true">.html</extension>
+  </extensions>
+
+  <toolshedgalaxy>
+  	<extension>bamqcreport</extension> 	
+  </toolshedgalaxy>
+</dataformat>

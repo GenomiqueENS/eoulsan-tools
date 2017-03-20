@@ -1,0 +1,14 @@
+<tool id="bamqc" name="bamqc">
+  <description>Quality Control of bam</description>
+  <command interpreter="docker" dockerimage="genomicpariscentre/bamqc:20160127">/bin/bash -c "bamqc -o . $input ; f=\$(basename $input .bam) ; rm \${f}_bamqc.zip ; mv \${f}_bamqc.html $output"</command>
+  <inputs>
+    <param format="bam" name="input" type="data" label="Source file"/>
+  </inputs>
+  <outputs>
+    <data format="bamqcreport" name="output" />
+  </outputs>
+
+</tool>
+
+
+

@@ -1,0 +1,12 @@
+<dataformat>
+  <name>alignqc_report_xhtml</name>
+  <description>AlignQC : Control quality bam</description>
+  <prefix>alignqc</prefix>
+  <extensions>
+  	<extension default="true">.xhtml</extension>
+  </extensions>
+
+  <toolshedgalaxy>
+  	<extension>alignqcreport</extension> 	
+  </toolshedgalaxy>
+</dataformat>
