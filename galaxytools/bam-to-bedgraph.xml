@@ -1,6 +1,6 @@
 <tool id="bam2bedgraph" name="bam2bedgraph">
   <description>Convert bam files to bedgraph file</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/deeptools:1.5.12">bamCoverage --numberOfProcessors=1 -b $input_bam -bai $input_bai -o $output_bedgraph -of bedgraph</command>
+  <command interpreter="docker" dockerimage="genomicpariscentre/deeptools:2.5.4">bash -c "if ! [ -f ${input_bam}.bai ] ; then ln -s $input_bai ${input_bam}.bai ; bai=1 ; fi ; bamCoverage --numberOfProcessors=1 -b $input_bam -o $output_bedgraph -of bedgraph --skipNAs ; if [ \$bai==1 ] ; then rm ${input_bam}.bai ; fi"</command>
   <inputs>
     <param format="bam" name="input_bam" type="data" label="Source file"/>
     <param format="bai" name="input_bai" type="data" label="Source file"/>
