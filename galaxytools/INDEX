@@ -11,3 +11,4 @@ bed-to-bigbed.xml
 umiwhitelist.xml
 umiextract.xml
 umicount.xml
+featurecounts.xml
