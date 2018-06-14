@@ -3,3 +3,5 @@ bedgraph.xml
 bigwig.xml
 adapter.xml
 bigbed.xml
+whitelist_txt.xml
+
