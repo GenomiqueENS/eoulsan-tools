@@ -10,7 +10,7 @@
         -s ${strand_specificity}
         -t ${feature_type}
         -g ${attribute_type}
-        ${input} > ${geneassigned}.out  2> ${geneassigned}.err ;
+        ${input} > ${geneassigned}.err  2> ${geneassigned}.out;
 
         mv \$(basename ${input} ).featureCounts.sam $outputsam;
         mv \$(basename ${geneassigned} ).summary $summary"
