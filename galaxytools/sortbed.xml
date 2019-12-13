@@ -1,6 +1,6 @@
 <tool id="sortbed" name="sortbed">
 	<description> Sort bed files </description>
-	<command interpreter="docker" dockerimage="genomicpariscentre/bedtools:latest">
+	<command interpreter="docker," dockerimage="genomicpariscentre/bedtools:latest">
 	/bin/bash -c "bedtools sort
 	
 	#if $param.sort == "default"

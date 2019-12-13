@@ -1,6 +1,6 @@
 <tool id="sortsam" name="sortsam">
 	<description>sort a sam file</description>
-	<command interpreter="docker" dockerimage="genomicpariscentre/picard:1.134">java -Xmx20g -jar /usr/local/bin/picard.jar SortSam TMP_DIR=$TMPDIR INPUT=$input OUTPUT=$output_sorted
+	<command interpreter="docker," dockerimage="genomicpariscentre/picard:1.134">java -Xmx20g -jar /usr/local/bin/picard.jar SortSam TMP_DIR=$TMPDIR INPUT=$input OUTPUT=$output_sorted
 
 	#if $param.sort == "coordinate"
 		SORT_ORDER=coordinate
