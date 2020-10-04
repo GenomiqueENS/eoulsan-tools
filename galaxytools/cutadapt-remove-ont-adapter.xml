@@ -1,7 +1,7 @@
 <tool id="cutadaptontadapters" name="cutadaptontadapters">
     	<description>Remove ONT adpaters</description>
 	<command interpreter="docker" dockerimage="genomicpariscentre/cutadapt:2.10">
-		cutadapt --quiet --cores=${THREADS} -a ${adapter} --error-rate=${error_rate} --overlap=${overlap} --output=${output} ${input}
+		cutadapt --quiet --cores=${THREADS} -a ${adapter} --error-rate=${error_rate} --overlap=${overlap} --discard-untrimmed --output=${output} ${input}
 	</command>
     	<inputs>
 		<param name="adapter" type="text" value="GGCGTCTGCTTGGGTGTTTAACCTAAGCAGTGGTATCAACGCAGAGTAC;required...GTACTCTGCGTTGATACCACTGCTTAGGTTAAACACCCAAGCAGACGCC;required" label="Adapter" />
