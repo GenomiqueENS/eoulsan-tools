@@ -1,82 +1,39 @@
 <tool id="umiwhitelist" name="umiwhitelist">
-    <description>Identify correct cell barcodes - more info : "umi_tools whitelist --help"</description>
+	<description>Identify correct cell barcodes - more info : "umi_tools whitelist --help"</description>
 
-    <command interpreter="docker," dockerimage="genomicpariscentre/umi-tools:0.5.3">bash -c "
-        umi_tools whitelist
-        --stdin ${inputr1}
-        --bc-pattern=${bc_pattern}
-        --plot-prefix=\$( basename ${output} .txt )
-        --method=${method}
+	<command interpreter="docker," dockerimage="genomicpariscentre/umi-tools:0.5.3">bash -c "
+		umi_tools whitelist
+		--stdin ${inputr1}
+		--bc-pattern=${bc_pattern}
+		--plot-prefix=\$( basename ${output} .txt )
+		--method=${method}
+		--log2stderr > $output 2> ${output}.err"
+	</command>
 
-        #if ${celloptions.expect_cells} != "0":
-            --expect-cells=${celloptions.expect_cells}
-        #endif
+	<inputs>
+		<param format="fastq" name="inputr1" type="data" label="Source file"/>
 
-        #if ${celloptions.set_cell_number} != "0":
-            --set-cell-number=${celloptions.set_cell_number}
-        #endif
+		<param name="bc_pattern"
+			type="text"
+			value="CCCCCCCCCCCCCCCCNNNNNNNNNN"
+			label="Barcode pattern"
+			help="Barcode pattern (identifies bases position)
+			N = UMI position (required) ;
+			C = cell barcode position (optional) ;
+			X = sample position (optional)"/>
 
-        #if ${celloptions.error_correct_thres} != "1":
-            --error_correct_threshold=${celloptions.error_correct_thres}
-        #endif
+		<param name="method"
+			type="select"
+			label="Method to count number of feature per cell"
+			help="Counts per cell barcode can be performed using either read or unique UMI counts.
+			Usage: --method=[read|umis] to set the counting method.
+			Default: umis">
+			<option value="umis" selected="true">Count on UMIs</option>
+			<option value="reads">Count on reads</option>
+		</param>
+	</inputs>
 
-        --log2stderr > $output 2> ${output}.err"
-    </command>
-
-    <inputs>
-        <param format="fastq" name="inputr1" type="data" label="Source file"/>
-
-        <param name="bc_pattern"
-            type="text"
-            value="CCCCCCCCCCCCCCCCNNNNNNNNNN"
-            label="Barcode pattern"
-            help="Barcode pattern (identifies bases position)
-            N = UMI position (required) ;
-            C = cell barcode position (optional) ;
-            X = sample position (optional)"/>
-
-        <param name="method"
-            type="select"
-            label="Method to count number of feature per cell"
-            help="Counts per cell barcode can be performed using either read or unique UMI counts.
-            Usage: --method=[read|umis] to set the counting method.
-            Default: umis">
-            <option value="umis" selected="true">Count on UMIs</option>
-            <option value="reads">Count on reads</option>
-        </param>
-
-        <conditional name="celloptions">
-            <param name="expect_cells"
-                type="integer"
-                min="0"
-                value="0"
-                label="Prior expectation on cell number upper limit"
-                help="Upper limit estimate for the number of inputted cells
-                Usage: expect-cells=1000
-                Default value: none"/>
-
-            <param name="set_cell_number"
-                type="integer"
-                min="0"
-                value="0"
-                label="Cell number to accept"
-                help="Explicity set the number of cell barcodes which should be accepted
-                Usage: set-cell-number=1000
-                Default value: none"/>
-
-            <param name="error_correct_thresh"
-                type="integer"
-                min="0"
-                value="1"
-                label="Hamming distance correction"
-                help="Hamming distance for correction of barcodes to whitelist barcodes.
-                Set to zero to generate no error correcting metrics.
-                Default value: 1"/>
-        </conditional>
-
-    </inputs>
-
-    <outputs>
-        <data format="whitelist_txt" name="output"/>
-    </outputs>
+	<outputs>
+		<data format="whitelist_txt" name="output"/>
+	</outputs>
 </tool>
