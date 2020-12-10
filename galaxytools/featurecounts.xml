@@ -1,14 +1,60 @@
 <tool id="featurecounts" name="featurecounts">
-	<description></description>
-	<command interpreter="docker," dockerimage="genomicpariscentre/subread:1.6.1"> bash -c "featureCounts -a ${annotation} -T ${THREADS} -o ${geneassigned} -R ${format} ${input} > ${geneassigned}.out  2> ${geneassigned}.err ; mv \$(basename ${input} ).featureCounts.sam $outputsam; mv \$(basename ${geneassigned} ).summary $summary"</command>
-	<inputs>
-		<param format="mapper_results_sam" name="input" type="data" label="Source file"/>
-		<param format="annotation_gtf" name="annotation" type="data" label="Source file"/>
-		<param name="format" type="text" value="SAM" label="Output format (BAM or SAM)"/>
-	</inputs>
-	<outputs>
-		<data format="text_txt" name="geneassigned"/>
-		<data format="mapper_results_sam" name="outputsam"/>
-		<data format="featurecounts_summary_txt" name="summary"/>
-	</outputs>
+    <description>Gene expression quantification with featureCounts</description>
+
+    <command interpreter="docker," dockerimage="genomicpariscentre/subread:1.6.1"> bash -c "
+        featureCounts
+        -a ${annotation}
+        -T ${THREADS}
+        -o ${geneassigned}
+        -R ${format}
+        -s ${strand_specificity}
+        -t ${feature_type}
+        -g ${attribute_type}
+        ${input} > ${geneassigned}.err  2> ${geneassigned}.out;
+
+        mv \$(basename ${input} ).featureCounts.sam $outputsam;
+        mv \$(basename ${geneassigned} ).summary $summary"
+    </command>
+
+    <inputs>
+        <param format="annotation_gtf" name="annotation" type="data" label="Source file"/>
+        <param format="mapper_results_sam" name="input" type="data" label="Source file"/>
+        <param name="format" type="text" value="SAM" label="Output format (BAM or SAM)"/>
+
+        <param name="strand_specificity"
+            type="select"
+            label="Specify strand information"
+            help="
+            -s: Perform strand-specific read counting.
+            Acceptable values: 0 (unstranded), 1 (stranded) and 2 (reversely stranded).
+            0 by default.">
+            <option value="0" selected="true">Unstranded</option>
+            <option value="1">Stranded (forward)</option>
+            <option value="2">Stranded (reverse)</option>
+        </param>
+
+        <param name="feature_type"
+            type="text"
+            value="exon"
+            label="Feature type in GTF annotation"
+            help="
+            -t: Specify feature type in GTF annotation. 'exon' by default.
+            Features used for read counting will be extracted from annotation
+            using the provided value."/>
+
+        <param name="attribute_type"
+            type="text"
+            value="gene_id"
+            label="Attribute type in GTF annotation"
+            help="
+            -g: Specify attribute type in GTF annotation.
+            'gene_id' by default. Meta-features used for read counting will be extracted
+            from annotation using the provided value."/>
+    </inputs>
+
+    <outputs>
+        <data format="text_txt" name="geneassigned"/>
+        <data format="mapper_results_sam" name="outputsam"/>
+        <data format="featurecounts_summary_txt" name="summary"/>
+    </outputs>
 </tool>

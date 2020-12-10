@@ -1,6 +1,6 @@
 <tool id="alignqc" name="alignqc">
   <description>Control quality bam</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/alignqc:v1.2.0">/usr/local/AlignQC/bin/alignqc analyze $input -r $genome_reference --no_annotation -o $output_xhtml</command>
+  <command interpreter="docker," dockerimage="genomicpariscentre/alignqc:v1.2.0">/usr/local/AlignQC/bin/alignqc analyze $input -r $genome_reference --no_annotation -o $output_xhtml</command>
   <inputs>
     <param format="bam" name="input" type="data" label="BAM Source file"/>
     <param format="genome_fasta" name="genome_reference" type="data" label="FASTA Source file"/>

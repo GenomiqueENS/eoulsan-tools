@@ -1,6 +1,6 @@
 <tool id="cutadapt" name="cutadapt">
   <description>convert input_fastq to output_fastq</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/cutadapt:1.8.3">
+  <command interpreter="docker," dockerimage="genomicpariscentre/cutadapt:1.8.3">
         cutadapt
 	#if $is2.endmode=="5" 
             -g file:$input_adapter

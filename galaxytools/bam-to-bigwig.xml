@@ -1,6 +1,6 @@
 <tool id="bam2bigwig" name="bam2bigwig">
   <description>Convert bam files to bigwig files</description>
-  <command interpreter="docker" dockerimage="genomicpariscentre/deeptools:2.5.7">bash -c "if ! [ -f ${input_bam}.bai ] ; then ln -s $input_bai ${input_bam}.bai ; bai=1 ; fi ; if [ $is.norm == 'yes' ]; then normalize='--normalizeUsingRPKM' ; fi ; bamCoverage -b $input_bam --binSize ${bsize} -o $output_bigwig \$normalize -of bigwig --skipNAs ; if [ \$bai==1 ] ; then rm ${input_bam}.bai ; fi"
+  <command interpreter="docker," dockerimage="genomicpariscentre/deeptools:2.5.7">bash -c "if ! [ -f ${input_bam}.bai ] ; then ln -s $input_bai ${input_bam}.bai ; bai=1 ; fi ; if [ $is.norm == 'yes' ]; then normalize='--normalizeUsingRPKM' ; fi ; bamCoverage -b $input_bam --binSize ${bsize} -o $output_bigwig \$normalize -of bigwig --skipNAs ; if [ \$bai==1 ] ; then rm ${input_bam}.bai ; fi"
   </command>
   <inputs>
     <param name="bsize" type="integer" value="50" label="Bin size"/>
