@@ -1,14 +1,14 @@
 <tool id="trimadapt" name="trimadapt">
     	<description>QC : Trim galore, if necessary (see QC reads)</description>
-    	<command interpreter="docker," dockerimage="genomicpariscentre/trimgalore:latest">
-	/bin/bash -c "trim_galore --path_to_cutadapt /tmp/cutadapt-1.8.1/bin/cutadapt --quality ${quality} -e ${error} --stringency ${stringency} --length ${length} 
+    	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:0.4.1">
+		/bin/bash -c "trim_galore --path_to_cutadapt /usr/local/cutadapt-1.8.1/bin/cutadapt --quality ${quality} -e ${error} --stringency ${stringency} --length ${length}
 	#if $is.paired == "no"
 		$input1 ;
-		/RenameOutput.sh $input1 $output1 "
+		/usr/local/bin/rename_trim_galore_output.sh trimmed $input1 $output1 "
 	#else:
 		--paired $input1 $input2 ;
-		/RenameOutput2.sh $input1 $output1 ;
-		/RenameOutput3.sh $input2 $output2 "
+		/usr/local/bin/rename_trim_galore_output.sh val_1 $input1 $output1 ;
+		/usr/local/bin/rename_trim_galore_output.sh val_2 $input2 $output2 "
 	#end if
 	</command>
     	<inputs>
