@@ -1,17 +1,17 @@
 <tool id="trimadapt" name="trimadapt">
-    	<description>QC : Trim galore, if necessary (see QC reads)</description>
-    	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:0.4.1">
+	<description>QC : Trim galore, if necessary (see QC reads)</description>
+	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:0.4.1">
 		/bin/bash -c "trim_galore --path_to_cutadapt /usr/local/cutadapt-1.8.1/bin/cutadapt --quality ${quality} -e ${error} --stringency ${stringency} --length ${length}
-	#if $is.paired == "no"
+		#if $is.paired == "no"
 		$input1 ;
 		/usr/local/bin/rename_trim_galore_output.sh trimmed $input1 $output1 "
-	#else:
+		#else:
 		--paired $input1 $input2 ;
 		/usr/local/bin/rename_trim_galore_output.sh val_1 $input1 $output1 ;
 		/usr/local/bin/rename_trim_galore_output.sh val_2 $input2 $output2 "
-	#end if
+		#end if
 	</command>
-    	<inputs>
+	<inputs>
 		<param name="quality" type="integer" value="20" label="Quality parameter" />
 		<param name="error" type="float" value="0.1" label="Error parameter" />
 		<param name="stringency" type="integer" value="1" label="Stringency parameter" />
@@ -19,18 +19,18 @@
 
 		<param format="fastq" name="input1" type="data" label="Source file"/>
 
-        	<conditional name="is">
-                        <param name="paired" type="select" label="Paired end selection">
-                                <option value="no" selected="true">Single end</option>
-                                <option value="yes">Paired end</option>
-                        </param>
+		<conditional name="is">
+			<param name="paired" type="select" label="Paired end selection">
+				<option value="no" selected="true">Single end</option>
+				<option value="yes">Paired end</option>
+			</param>
 			<when value="yes">
 				<param format="fastq" name="input2" type="data" label="Source file"/>
 			</when>
-                </conditional>
+		</conditional>
 	</inputs>
 
-    	<outputs>
+	<outputs>
 		<data format="fastq" name="output1"/>
 
 		<conditional name="is">

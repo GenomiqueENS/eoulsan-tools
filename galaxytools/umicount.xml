@@ -6,7 +6,6 @@
         -I ${input}
         -S ${output}
 
-        --paired=${paired}
         --mapping-quality=${mapping_quality}
         --method=${method}
         --edit-distance-threshold=${edit_distance_threshold}
@@ -21,16 +20,6 @@
 
     <inputs>
         <param format="mapper_results_bam" name="input" type="data" label="Source file"/>
-
-        <param argument="--paired"
-            name="paired"
-            type="boolean"
-            truevalue="--paired"
-            falsevalue=""
-            value="False"
-            label="Bam is paired-end"
-            help="Both read pairs will be output. This will also force the use of the template length to determine reads with the same mapping coordinates."/>
-
 
         <param argument="--mapping-quality"
             name="mapping_quality"
