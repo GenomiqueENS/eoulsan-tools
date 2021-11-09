@@ -15,7 +15,7 @@
 
 		<param name="bc_pattern"
 			type="text"
-			value="CCCCCCCCCCCCCCCCNNNNNNNNNN"
+			value="CCCCCCCCCCCCCCCCNNNNNNNNNNNN"
 			label="Barcode pattern"
 			help="Barcode pattern (identifies bases position)
 			N = UMI position (required) ;
