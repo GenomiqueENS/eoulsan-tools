@@ -1,7 +1,7 @@
 <tool id="umiwhitelist" name="umiwhitelist">
 	<description>Identify correct cell barcodes - more info : "umi_tools whitelist --help"</description>
 
-	<command interpreter="docker," dockerimage="genomicpariscentre/umi-tools:0.5.3">bash -c "
+	<command interpreter="docker" dockerimage="genomicpariscentre/umi-tools:0.5.3">bash -c "
 		umi_tools whitelist
 		--stdin ${inputr1}
 		--bc-pattern=${bc_pattern}
