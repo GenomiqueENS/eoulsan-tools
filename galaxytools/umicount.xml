@@ -10,7 +10,6 @@
         --method=${method}
         --edit-distance-threshold=${edit_distance_threshold}
         --gene-tag=${gene_tag}
-        --assigned-status-tag=${assigned_status_tag}
         '$per_cell'
         '$per_gene'
         '$per_contig'
@@ -66,15 +65,6 @@
             value="XT"
             label="Gene tag in bam"
             help="The gene information is encoded in the bam read tag."/>
-
-        <param argument="--assigned-status-tag"
-            name="assigned_status_tag"
-            type="text"
-            value="XS"
-            label="Assigned tag in bam"
-            help="Bam tag describing whether read is assigned to a
-            gene. By default, this is set as the same tag as --gene-
-            tag"/>
 
         <param argument="--per-cell"
             name="per_cell"
