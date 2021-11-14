@@ -10,8 +10,8 @@
         --method=${method}
         --edit-distance-threshold=${edit_distance_threshold}
         --gene-tag=${gene_tag}
-        '$per_cell'
-        '$per_gene'
+        --per-cell
+        --per-gene
         '$per_contig'
         '$wide_format_cell_counts'
         2>${output}.err"
@@ -65,23 +65,6 @@
             value="XT"
             label="Gene tag in bam"
             help="The gene information is encoded in the bam read tag."/>
-
-        <param argument="--per-cell"
-            name="per_cell"
-            type="boolean"
-            truevalue="--per-cell"
-            falsevalue=""
-            value="True"
-            label="Group reads only if they have the same cell barcode."/>
-
-        <param argument="--per-gene"
-            name="per_gene"
-            type="boolean"
-            truevalue="--per-gene"
-            falsevalue=""
-            value="True"
-            label="Group/Dedup/Count per gene."
-            help="Must combine with either --gene-tag or --per-contig"/>
 
         <param argument="--per-contig"
             name="per_contig"
