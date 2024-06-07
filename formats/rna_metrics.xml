@@ -1,0 +1,8 @@
+<dataformat>
+	<name>rna_metrics</name>
+	<description>Picard CollectRnaSeqMetrics output format</description>
+	<prefix>rnametrics</prefix>
+	<extensions>
+		<extension default="true">.RNAMetrics</extension>
+	</extensions>
+</dataformat>
