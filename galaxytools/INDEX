@@ -12,4 +12,7 @@ umiwhitelist.xml
 umiextract.xml
 umicount.xml
 featurecounts.xml
+gtf-to-refflat.xml
+collectrnaseqeetrics-picard-3.1.1.xml
+gtf-to-ribosomal-interval-list.xml
 

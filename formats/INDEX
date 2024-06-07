@@ -4,4 +4,7 @@ bigwig.xml
 adapter.xml
 bigbed.xml
 whitelist_txt.xml
+refflat.xml
+rna_metrics.xml
+ribosomal_interval_list.xml
 

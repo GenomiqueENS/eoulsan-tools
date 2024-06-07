@@ -1,0 +1,14 @@
+<dataformat>
+  <name>annotation_refflat</name>
+  <description>RefFlat annotation format</description>
+  <prefix>refflat</prefix>
+  <onefileperanalysis>true</onefileperanalysis>
+  <designmetadatakey>RefFlatFile</designmetadatakey>
+  <generator/>
+  <extensions>
+    <extension default="true">.refflat</extension>
+  </extensions>
+  <galaxy>
+    <formatname>refflat</formatname>
+  </galaxy>
+</dataformat>
