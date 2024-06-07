@@ -1,0 +1,8 @@
+<dataformat>
+	<name>ribosomal_interval_list</name>
+	<description>Picard CollectRnaSeqMetrics ribosomal interval list</description>
+	<prefix>ribosomalintervallist</prefix>
+	<extensions>
+		<extension default="true">.intervallist</extension>
+	</extensions>
+</dataformat>

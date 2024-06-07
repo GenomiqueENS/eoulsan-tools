@@ -1,0 +1,12 @@
+<tool id="gtf2refflat" name="gtf2refflat">
+  <description>Convert bam files to bedgraph file</description>
+  <command interpreter="docker" dockerimage="genomicpariscentre/gtftogenepred:v369">bash -c "gtfToGenePred -genePredExt -ignoreGroupsWithoutExons ${input} /dev/stdout | awk -v OFS='	'  '{print $12, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10}' > ${output}"</command>
+  <inputs>
+    <param format="annotation_gtf" name="input" type="data" label="Input file"/>
+  </inputs>
+  <outputs>
+    <data format="annotation_refflat" name="output" />
+  </outputs>
+</tool>
+
+

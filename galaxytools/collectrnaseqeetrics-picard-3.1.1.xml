@@ -1,0 +1,15 @@
+<tool id="collectrnaseqmetrics" name="collectrnaseqmetrics">
+  <description>mark and removes duplicates from a bam file</description>
+  <command interpreter="docker," dockerimage="genomicpariscentre/picard:3.1.1">java -Xmx8g -jar /usr/local/bin/picard.jar CollectRnaSeqMetrics I=$input_bam O=$output REF_FLAT=$input_refflat STRAND=$strand</command>
+  <!--command interpreter="docker," dockerimage="genomicpariscentre/picard:3.1.1">java -Xmx8g -jar /usr/local/bin/picard.jar CollectRnaSeqMetrics I=$input_bam RIBOSOMAL_INTERVALS=$input_interval O=$output REF_FLAT=$input_refflat STRAND=$strand</command-->
+  <inputs>
+    <param name="strand" type="text" value="FIRST_READ_TRANSCRIPTION_STRAND" label="Strand"/>
+    <param format="bam" name="input_bam" type="data" label="Source file"/>
+    <param format="refflat" name="input_refflat" type="data" label="Reference file"/>
+    <!--param format="ribosomal_interval_list" name="input_interval" type="data" label="Reference file"/-->
+  </inputs>
+  <outputs>
+    <data format="rna_metrics" name="output" />
+  </outputs>
+
+</tool>
