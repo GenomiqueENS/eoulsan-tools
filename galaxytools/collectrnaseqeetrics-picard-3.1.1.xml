@@ -1,12 +1,38 @@
 <tool id="collectrnaseqmetrics" name="collectrnaseqmetrics">
   <description>mark and removes duplicates from a bam file</description>
-  <command interpreter="docker," dockerimage="genomicpariscentre/picard:3.1.1">java -Xmx8g -jar /usr/local/bin/picard.jar CollectRnaSeqMetrics I=$input_bam O=$output REF_FLAT=$input_refflat STRAND=$strand</command>
-  <!--command interpreter="docker," dockerimage="genomicpariscentre/picard:3.1.1">java -Xmx8g -jar /usr/local/bin/picard.jar CollectRnaSeqMetrics I=$input_bam RIBOSOMAL_INTERVALS=$input_interval O=$output REF_FLAT=$input_refflat STRAND=$strand</command-->
+  <command interpreter="docker," dockerimage="genomicpariscentre/picard:3.1.1">java -Xmx8g -jar /usr/local/bin/picard.jar CollectRnaSeqMetrics
+                                                                                 I=$input
+                                                                                 O=$output
+                                                                                 REF_FLAT=$input_refflat
+                                                                                 STRAND=$strand
+  #if $is.interval.list == "yes"
+                                                                                 RIBOSOMAL_INTERVALS=$input_interval
+  #end if
+  </command>
   <inputs>
     <param name="strand" type="text" value="FIRST_READ_TRANSCRIPTION_STRAND" label="Strand"/>
-    <param format="bam" name="input_bam" type="data" label="Source file"/>
+    <conditional name="format">
+      <param name="input.format" type="select" label="Input format">
+        <option value="bam" selected="true">BAM format</option>
+        <option value="sam">SAM format</option>
+      </param>
+      <when value="bam">
+        <param format="bam" name="input" type="data" label="Source file"/>
+      </when>
+      <when value="sam">
+        <param format="sam" name="input" type="data" label="Source file"/>
+      </when>
+    </conditional>
     <param format="refflat" name="input_refflat" type="data" label="Reference file"/>
-    <!--param format="ribosomal_interval_list" name="input_interval" type="data" label="Reference file"/-->
+    <conditional name="is">
+      <param name="interval.list" type="select" label="Enable interval list">
+        <option value="no" selected="true">No interval list</option>
+        <option value="yes">Use interval list</option>
+      </param>
+      <when value="yes">
+        <param format="ribosomal_interval_list" name="input_interval" type="data" label="Reference file"/>
+      </when>
+    </conditional>
   </inputs>
   <outputs>
     <data format="rna_metrics" name="output" />
