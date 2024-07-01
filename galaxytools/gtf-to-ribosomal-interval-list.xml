@@ -1,9 +1,9 @@
 <tool id="gtf2ribosomalintervallist" name="gtf2ribosomalintervallist">
   <description>Convert bam files to bedgraph file</description>
-  <command interpreter="docker" dockerimage="ubuntu:20.04">bash -c "grep '\#\#sequence-region' ${input_gff} | awk -v OFS='	' '{print $2,$4}' | sed 's/	/	LN:/' | sed 's/^/@SQ	SN:/' >  ${TMPDIR}/header.txt ; grep rRNA ${input_gtf}  | grep '	gene	' | cut -f 1,4,5,7,9 > ${TMPDIR}/pre.txt ; cut -f 1,2,3,4 ${TMPDIR}/pre.txt > ${TMPDIR}/part1.txt ; grep -o -e 'gene_id[ \"A-Za-z0-9]*' ${TMPDIR}/pre.txt | sed 's/gene_id//' | tr -d ' ' | tr -d '\"' > ${TMPDIR}/part2.txt ; echo '@HD	VN:1.0	SO:unsorted' > ${TMPDIR}/output.txt  ; cat ${TMPDIR}/header.txt >> ${TMPDIR}/output.txt ; paste ${TMPDIR}/part1.txt ${TMPDIR}/part2.txt >> ${TMPDIR}/output.txt ; cp ${TMPDIR}/output.txt ${output} ; rm ${TMPDIR}/header.txt ${TMPDIR}/output.txt ${TMPDIR}/part1.txt ${TMPDIR}/part2.txt ${TMPDIR}/pre.txt"</command>
+  <command interpreter="docker" dockerimage="ubuntu:20.04">bash -c "grep -v '^genome.sequences=' ${input_genomedesc} | grep '^genome\\.sequence\\.' | sed 's/^genome\\.sequence\\./@SQ	SN:/' | sed 's/=/	LN:/' >  ${TMPDIR}/header.txt ; grep rRNA ${input_gtf}  | grep '	gene	' | cut -f 1,4,5,7,9 > ${TMPDIR}/pre.txt ; cut -f 1,2,3,4 ${TMPDIR}/pre.txt > ${TMPDIR}/part1.txt ; grep -o -e 'gene_id[ \"A-Za-z0-9]*' ${TMPDIR}/pre.txt | sed 's/gene_id//' | tr -d ' ' | tr -d '\"' > ${TMPDIR}/part2.txt ; echo '@HD	VN:1.0	SO:unsorted' > ${TMPDIR}/output.txt  ; cat ${TMPDIR}/header.txt >> ${TMPDIR}/output.txt ; paste ${TMPDIR}/part1.txt ${TMPDIR}/part2.txt >> ${TMPDIR}/output.txt ; cp ${TMPDIR}/output.txt ${output} ; rm ${TMPDIR}/header.txt ${TMPDIR}/output.txt ${TMPDIR}/part1.txt ${TMPDIR}/part2.txt ${TMPDIR}/pre.txt"</command>
   <inputs>
+    <param format="genome_desc_txt" name="input_genomedesc" type="data" label="Input file"/>
     <param format="annotation_gtf" name="input_gtf" type="data" label="Input file"/>
-    <param format="annotation_gff" name="input_gff" type="data" label="Input file"/>
   </inputs>
   <outputs>
     <data format="ribosomal_interval_list" name="output" />
