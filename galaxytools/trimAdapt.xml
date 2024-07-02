@@ -1,14 +1,14 @@
 <tool id="trimadapt" name="trimadapt">
     	<description>QC : Trim galore, if necessary (see QC reads)</description>
-    	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:0.4.1">
-		/bin/bash -c "trim_galore --path_to_cutadapt /usr/local/cutadapt-1.8.1/bin/cutadapt --quality ${quality} -e ${error} --stringency ${stringency} --length ${length}
+	<command interpreter="docker" dockerimage="genomicpariscentre/trimgalore:0.6.10">
+		/bin/bash -c "trim_galore --dont_gzip --quality ${quality} -e ${error} --stringency ${stringency} --length ${length}
 	#if $is.paired == "no"
 		$input1 ;
-		/usr/local/bin/rename_trim_galore_output.sh trimmed $input1 $output1 "
+		/usr/local/bin/rename_trim_galore_output.sh trimmed $input1 $output1 $report1"
 	#else:
 		--paired $input1 $input2 ;
-		/usr/local/bin/rename_trim_galore_output.sh val_1 $input1 $output1 ;
-		/usr/local/bin/rename_trim_galore_output.sh val_2 $input2 $output2 "
+		/usr/local/bin/rename_trim_galore_output.sh val_1 $input1 $output1 $report1 ;
+		/usr/local/bin/rename_trim_galore_output.sh val_2 $input2 $output2 $report2 "
 	#end if
 	</command>
     	<inputs>
@@ -32,6 +32,7 @@
 
     	<outputs>
 		<data format="fastq" name="output1"/>
+		<data format="cutadapt_report" name="report1"/>
 
 		<conditional name="is">
 			<param name="paired" type="select" label="Paired end selection">
@@ -40,6 +41,7 @@
 			</param>
 			<when value="yes">
 				<data format="fastq" name="output2"/>
+				<data format="cutadapt_report" name="report2"/>
 			</when>
 		</conditional>
 	</outputs>
