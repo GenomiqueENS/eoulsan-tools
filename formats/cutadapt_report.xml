@@ -1,0 +1,8 @@
+<dataformat>
+  <name>cutadapt_report</name>
+  <description>Cutadapt report</description>
+  <prefix>cutadaptreport</prefix>
+  <extensions>
+    <extension default="true">.txt</extension>
+  </extensions>
+</dataformat>
